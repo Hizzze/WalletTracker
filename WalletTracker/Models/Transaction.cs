@@ -10,6 +10,9 @@ public class Transaction
     
     public Guid WalletId { get; set; }
     public Wallet? Wallet { get; set; }
+    
+    public Guid? CategoryId { get; set; }
+    public Category? Category { get; set; }
 }
 
 public enum TransactionType

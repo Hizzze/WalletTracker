@@ -11,4 +11,8 @@ public class User
     public List<Category>? Categories { get; set; }
     
     public List<Wallet>? Wallets { get; set; }
+    
+    public List<SavingsGoals>? SavingsGoals { get; set; }
+    
+    public List<Budget>? Budgets { get; set; }
 }
