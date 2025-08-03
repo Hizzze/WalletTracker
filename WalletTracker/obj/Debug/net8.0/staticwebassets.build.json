@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "HgMSEc77nVlAf2ztStjTDVHCWXfGkW4eZNu6rQ37M/g=",
+  "Source": "WalletTracker",
+  "BasePath": "_content/WalletTracker",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
