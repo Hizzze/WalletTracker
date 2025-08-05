@@ -134,3 +134,16 @@
 /Users/vlad/RiderProjects/Chat/BackEnd/WalletTracker/WalletTracker/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 /Users/vlad/RiderProjects/Chat/BackEnd/WalletTracker/WalletTracker/bin/Debug/net8.0/runtimes/browser/lib/net8.0/System.Text.Encodings.Web.dll
 /Users/vlad/RiderProjects/Chat/BackEnd/WalletTracker/WalletTracker/obj/Debug/net8.0/WalletTracker.sourcelink.json
+/Users/vlad/RiderProjects/Chat/BackEnd/WalletTracker/WalletTracker/bin/Debug/net8.0/Microsoft.Extensions.Configuration.Binder.dll
+/Users/vlad/RiderProjects/Chat/BackEnd/WalletTracker/WalletTracker/bin/Debug/net8.0/Microsoft.Extensions.Diagnostics.Abstractions.dll
+/Users/vlad/RiderProjects/Chat/BackEnd/WalletTracker/WalletTracker/bin/Debug/net8.0/Microsoft.Extensions.FileProviders.Abstractions.dll
+/Users/vlad/RiderProjects/Chat/BackEnd/WalletTracker/WalletTracker/bin/Debug/net8.0/Microsoft.Extensions.Hosting.Abstractions.dll
+/Users/vlad/RiderProjects/Chat/BackEnd/WalletTracker/WalletTracker/bin/Debug/net8.0/Serilog.dll
+/Users/vlad/RiderProjects/Chat/BackEnd/WalletTracker/WalletTracker/bin/Debug/net8.0/Serilog.AspNetCore.dll
+/Users/vlad/RiderProjects/Chat/BackEnd/WalletTracker/WalletTracker/bin/Debug/net8.0/Serilog.Extensions.Hosting.dll
+/Users/vlad/RiderProjects/Chat/BackEnd/WalletTracker/WalletTracker/bin/Debug/net8.0/Serilog.Extensions.Logging.dll
+/Users/vlad/RiderProjects/Chat/BackEnd/WalletTracker/WalletTracker/bin/Debug/net8.0/Serilog.Formatting.Compact.dll
+/Users/vlad/RiderProjects/Chat/BackEnd/WalletTracker/WalletTracker/bin/Debug/net8.0/Serilog.Settings.Configuration.dll
+/Users/vlad/RiderProjects/Chat/BackEnd/WalletTracker/WalletTracker/bin/Debug/net8.0/Serilog.Sinks.Console.dll
+/Users/vlad/RiderProjects/Chat/BackEnd/WalletTracker/WalletTracker/bin/Debug/net8.0/Serilog.Sinks.Debug.dll
+/Users/vlad/RiderProjects/Chat/BackEnd/WalletTracker/WalletTracker/bin/Debug/net8.0/Serilog.Sinks.File.dll
