@@ -1,6 +1,6 @@
 namespace WalletTracker.Hasher;
 
-public interface IPasswordHasher
+public class JwtProvider
 {
     
 }

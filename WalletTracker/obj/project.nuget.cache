@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "7NOUYM3VR004w3CuA94wTRnP2WZkjiXWJ5MSiZEDuu9VxF/WmPCZLwf9KPGdqL+4+hukmnKRbwuCbTCeA/1LJg==",
+  "dgSpecHash": "ommK9y5FoeS4fZvlsbimvyw/RQhXG5lTRBnJT6uZXwKPBXuySYocuno97NfUSsLNNoEJOHJo1SecEG/VD32pnQ==",
   "success": true,
   "projectFilePath": "/Users/vlad/RiderProjects/WalletTracker/WalletTracker/WalletTracker.csproj",
   "expectedPackageFiles": [
+    "/Users/vlad/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/Users/vlad/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/vlad/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/8.0.19/microsoft.aspnetcore.authentication.jwtbearer.8.0.19.nupkg.sha512",
     "/Users/vlad/.nuget/packages/microsoft.aspnetcore.openapi/8.0.0/microsoft.aspnetcore.openapi.8.0.0.nupkg.sha512",
