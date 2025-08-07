@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WalletTracker")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0a6392dd6308f5ac30cc858f9641565de12e615e")]
 [assembly: System.Reflection.AssemblyProductAttribute("WalletTracker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WalletTracker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

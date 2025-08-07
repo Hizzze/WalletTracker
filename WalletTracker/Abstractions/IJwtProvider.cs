@@ -1,6 +1,8 @@
+using WalletTracker.Models;
+
 namespace WalletTracker.Abstractions;
 
-public class IJwtProvider
+public interface IJwtProvider
 {
-    
+    string GenerateJwtToken(User user);
 }

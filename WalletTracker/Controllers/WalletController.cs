@@ -1,3 +1,6 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WalletTracker.Abstractions;
 using WalletTracker.Dtos;
@@ -9,6 +12,7 @@ namespace WalletTracker.Controllers;
 
 [ApiController]
 [Route("api/wallets")]
+[Authorize]
 public class WalletController : ControllerBase
 {
     private readonly IWalletService _walletService;
@@ -120,6 +124,37 @@ public class WalletController : ControllerBase
 
     private Guid GetCurrentUserId()
     {
-        return Guid.Parse(User.FindFirst("sub")?.Value!);
+        // 1. Получаем токен из куки
+        var token = Request.Cookies["auth-token"];
+    
+        if (string.IsNullOrEmpty(token))
+        {
+            throw new UnauthorizedAccessException("Authentication token not found");
+        }
+
+        // 2. Создаем обработчик токенов
+        var tokenHandler = new JwtSecurityTokenHandler();
+    
+        try
+        {
+            // 3. Читаем токен без валидации (так как валидация уже выполнена middleware)
+            var jwtToken = tokenHandler.ReadJwtToken(token);
+        
+            // 4. Извлекаем идентификатор пользователя
+            var userIdClaim = jwtToken.Claims.FirstOrDefault(c => c.Type == "userId") 
+                              ?? jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+        
+            if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
+            {
+                throw new UnauthorizedAccessException("Invalid user identifier in token");
+            }
+        
+            return userId;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error parsing JWT token");
+            throw new UnauthorizedAccessException("Invalid authentication token");
+        }
     }
 }
