@@ -22,13 +22,13 @@ public class AuthService : IAuthService
 
     public async Task Register(string userName, string email, string password)
     {
-        var hashedPassword = _passwordHasher.Generate(password);
+        var passwordHash = _passwordHasher.Generate(password);
         var user = new User
         {
             Id = Guid.NewGuid(),
             Username = userName,
             Email = email,
-            PasswordHash = hashedPassword
+            PasswordHash = passwordHash
         };
         await _userRepository.CreateUserAsync(user);
     }
