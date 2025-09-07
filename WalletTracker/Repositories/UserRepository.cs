@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WalletTracker.Abstractions;
 using WalletTracker.Database;
+using WalletTracker.Dtos;
 using WalletTracker.Exceptions;
 using WalletTracker.Models;
 
@@ -59,19 +60,21 @@ public class UserRepository : IUserRepository
         return user;
     }
 
-    public async Task<User?> UpdateUserAsync(User user)
+    public async Task<User> UpdateUserAsync(Guid id, UpdateUserDto userDto)
     {
-        var existingUser = await _context.Users.FirstOrDefaultAsync(x => x.Id == user.Id);
+        var existingUser = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
         if (existingUser == null)
         {
-            _logger.LogWarning("User with id {Id} not found for update", user.Id);
+            _logger.LogWarning("User with id {Id} not found for update", id);
             throw new NotFoundException("User not found");
         }
-        _context.Entry(existingUser).CurrentValues.SetValues(user);
-        await _context.SaveChangesAsync();
-        return user;
-    }
 
+        existingUser.Username = userDto.UserName;
+        existingUser.Email = userDto.Email;
+    
+        await _context.SaveChangesAsync();
+        return existingUser; 
+    }
     public async Task<User?> DeleteUserAsync(Guid id)
     {
         var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
