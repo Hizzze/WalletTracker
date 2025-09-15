@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using WalletTracker.Abstractions;
 using WalletTracker.Dtos;
@@ -11,10 +12,11 @@ namespace WalletTracker.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
-    
-    public UserController(IUserService service)
+    private readonly IMapper _mapper;
+    public UserController(IUserService service, IMapper mapper)
     {
         _userService = service;
+        _mapper = mapper;
     }
 
 
@@ -35,6 +37,20 @@ public class UserController : ControllerBase
     public async Task<ActionResult<User>> GetUserByEmail(string email)
     {
         return Ok(await _userService.GetUserByEmailAsync(email));
+    }
+    
+
+    [HttpGet("all")]
+    public async Task<ActionResult<List<UserDto>>> GetAllUsers()
+    {
+        var allUsers = await _userService.GetAllUsersAsync();
+
+        if (allUsers == null || !allUsers.Any())
+        {
+            return NotFound("No users found");
+        }
+        var usersDto = _mapper.Map<List<UserDto>>(allUsers);
+        return Ok(usersDto);
     }
     
     [HttpPost]

@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Serilog;
 using WalletTracker.Abstractions;
+using WalletTracker.AutoMapperProfile;
 using WalletTracker.Database;
 using WalletTracker.Hasher;
 using WalletTracker.Repositories;
@@ -12,13 +13,17 @@ builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Confi
 
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(JwtOptions)));
 
+
 new Extensions().AddApiAuthentication(builder.Services, builder.Configuration, 
     builder.Services.BuildServiceProvider().GetRequiredService<IOptions<JwtOptions>>());
+
+
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IWalletRepository, WalletRepository>();
 builder.Services.AddScoped<IWalletService, WalletService>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();

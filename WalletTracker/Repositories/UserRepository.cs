@@ -17,19 +17,10 @@ public class UserRepository : IUserRepository
         _context = context;
         _logger = logger;
     }
-
-    public async Task<User?> GetByIdAsync(Guid id, bool includeRelations = false)
+    
+    public async Task<User?> GetByIdAsync(Guid id)
     {
         var query = _context.Users.AsQueryable();
-        if (includeRelations)
-        {
-            query = query
-                .Include(u => u.Wallets)
-                .Include(u => u.Budgets)
-                .Include(u => u.Categories)
-                .Include(u => u.SavingsGoals);
-            
-        }
         return await query.FirstOrDefaultAsync(u => u.Id == id);
     }
     public async Task<User?> GetUserByEmailAsync(string email)
@@ -40,11 +31,6 @@ public class UserRepository : IUserRepository
             throw new NotFoundException("Email not found");
         }
             return await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
-    }
-
-    public async Task ExistsByEmailAsync(string email)
-    {
-        await _context.Users.AnyAsync(x => x.Email == email);
     }
 
     public async Task<List<User>> GetAllUsersAsync()

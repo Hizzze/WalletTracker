@@ -47,6 +47,33 @@ public class UserService : IUserService
         }
     }
 
+    public async Task<User> ExistUserByEmailAsync(string email)
+    {
+        try
+        {
+            return await _userRepository.GetUserByEmailAsync(email);
+        }
+        catch (NotFoundException e)
+        {
+            _logger.LogError(e, "Error getting user by email");
+            throw;
+        }
+    }
+
+    public async Task<List<User>> GetAllUsersAsync()
+    {
+        try
+        {
+            return await _userRepository.GetAllUsersAsync();
+        }
+        catch (NotFoundException e)
+        {
+            _logger.LogError(e, "Error getting all users");
+            throw;
+        }
+    }
+    
+
 
     public async Task<User> CreateUserAsync(CreateUserDto userDto)
     {

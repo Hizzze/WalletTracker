@@ -305,3 +305,5 @@
 /Users/vlad/RiderProjects/WalletTracker/WalletTracker/obj/Debug/net8.0/WalletTracker.pdb
 /Users/vlad/RiderProjects/WalletTracker/WalletTracker/obj/Debug/net8.0/WalletTracker.genruntimeconfig.cache
 /Users/vlad/RiderProjects/WalletTracker/WalletTracker/obj/Debug/net8.0/ref/WalletTracker.dll
+/Users/vlad/RiderProjects/WalletTracker/WalletTracker/bin/Debug/net8.0/AutoMapper.dll
+/Users/vlad/RiderProjects/WalletTracker/WalletTracker/bin/Debug/net8.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll

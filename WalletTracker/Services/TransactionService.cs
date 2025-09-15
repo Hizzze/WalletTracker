@@ -1,4 +1,6 @@
+using AutoMapper;
 using WalletTracker.Abstractions;
+using WalletTracker.AutoMapperProfile;
 using WalletTracker.Dtos;
 using WalletTracker.Exceptions;
 using WalletTracker.Models;
@@ -10,12 +12,14 @@ public class TransactionService : ITransactionService
     private readonly ITransactionRepository _transactionRepository;
     private readonly IWalletService _walletService;
     private readonly ILogger<TransactionService> _logger;
+    private readonly IMapper _mapper;
     
-    public TransactionService(ITransactionRepository transactionRepository, ILogger<TransactionService> logger, IWalletService walletService)
+    public TransactionService(ITransactionRepository transactionRepository, ILogger<TransactionService> logger, IWalletService walletService, IMapper mapper)
     {
         _transactionRepository = transactionRepository;
         _walletService = walletService;
         _logger = logger;
+        _mapper = mapper;
     }
 
     public async Task<Transaction> GetTransactionById(Guid id)
@@ -48,16 +52,7 @@ public class TransactionService : ITransactionService
     {
         try
         {
-            var transaction = new Transaction
-            {
-                Id = Guid.NewGuid(),
-                Amount = transactionDto.Amount,
-                Date = DateTime.UtcNow,
-                Type = transactionDto.Type,
-                Description = transactionDto.Description,
-                WalletId = transactionDto.WalletId,
-                // CategoryId = transactionDto.CategoryId
-            };
+            var transaction = _mapper.Map<Transaction>(transactionDto);
             
             return await _transactionRepository.CreateTransaction(transaction);
         }
@@ -73,21 +68,24 @@ public class TransactionService : ITransactionService
         try
         {
             var existingTransaction = await _transactionRepository.GetTransactionById(transactionDto.Id);
+
+            if (existingTransaction == null)
+            {
+                _logger.LogWarning("Transaction with id {Id} not found for update", transactionDto.Id);
+                throw new NotFoundException("Transaction not found");
+            }
             
-            // Обновляем только разрешенные поля
-            existingTransaction.Amount = transactionDto.Amount;
-            existingTransaction.Description = transactionDto.Description;
-            existingTransaction.Date = transactionDto.Date;
-            existingTransaction.Type = transactionDto.Type;
-             await _transactionRepository.UpdateTransaction(existingTransaction);
+            _mapper.Map(transactionDto, existingTransaction);
+
+            await _transactionRepository.UpdateTransaction(existingTransaction);
+
+            return existingTransaction;
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error updating transaction {TransactionId}", transactionDto.Id);
             throw;
         }
-        
-        return await _transactionRepository.GetTransactionById(transactionDto.Id);
     }
     public async Task DeleteAsync(Guid id)
     {

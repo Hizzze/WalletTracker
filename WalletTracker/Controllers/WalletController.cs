@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WalletTracker.Abstractions;
@@ -17,11 +18,13 @@ public class WalletController : ControllerBase
 {
     private readonly IWalletService _walletService;
     private readonly ILogger<WalletController> _logger;
+    private readonly IMapper _mapper;
 
-    public WalletController(IWalletService walletService, ILogger<WalletController> logger)
+    public WalletController(IWalletService walletService, ILogger<WalletController> logger, IMapper mapper)
     {
         _walletService = walletService;
         _logger = logger;
+        _mapper = mapper;
     }
 
     [HttpGet("{id}")]
@@ -30,7 +33,7 @@ public class WalletController : ControllerBase
         try
         {
             var userId = GetCurrentUserId();
-            var wallet = await _walletService.GetWalletById(id, userId);
+            var wallet = _mapper.Map<WalletDto>(await _walletService.GetWalletById(id, userId));
             return Ok(wallet);
         }
         catch (Exception ex)
@@ -54,13 +57,7 @@ public class WalletController : ControllerBase
         try
         {
             var userId = GetCurrentUserId();
-            var wallet = new Wallet
-            {
-                Name = walletCreateDto.Name,
-                Balance = walletCreateDto.Balance,
-                Currency = walletCreateDto.Currency,
-                UserId = userId
-            };
+            var wallet = _mapper.Map<Wallet>(walletCreateDto);
             var createdWallet = await _walletService.CreateWalletAsync(wallet);
             return CreatedAtAction(nameof(GetWallet), new { id = createdWallet.Id }, createdWallet);
         }
